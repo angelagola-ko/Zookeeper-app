@@ -47,16 +47,30 @@ function filterByQuery(query, animalsArray){
     return filteredResults;
 }
 
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
+
 app.get('/api/animals', (req,res) => {
-    let results = animals;
+   let results = animals;
     if (req.query) {
-        results = filterByQuery(req.query, results);
+        results = filterByQuery(req.query, results);//return single animal
     }
     console.log(req.query);
     res.json(results);
-  //  res.send('Hjnjknjo');
-//  res.json(animals);
-})
+   res.send('Hjnjknjo');
+ res.json(animals);
+});
+
+app.get('/api/animals/:id', (req,res) => {
+    const result = findById(req.params.id, animals);
+    if (result) {
+        res.json(result);
+    } else {
+        res.send(404);
+    }
+});
 
 
 const { animals } = require('./data/animals.json');
