@@ -136,8 +136,24 @@ app.get('/', (req,res) => {
     });
 
     
+app.get('/animals', (req,res) => {//normal HTML page
+    res.sendFile(path.join(__dirname, './public/animals.html'));
+});
+
+app.get('/zookeeper', (req,res) => {
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
+});
+//catches errors in routes and brings to homepage *=wildcard
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, './public/index.html'));
+  });
+
     app.listen(PORT, () => {
         console.log(`API server now on ${PORT}!`);
     });
+
+
+
+    // '/api/animals has JSON in it.
     
     
