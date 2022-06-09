@@ -108,6 +108,33 @@
         "hungry"
       ],
       "id": "10"
+    },
+    {
+      "name": "blib",
+      "species": "zc",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "anxious"
+      ],
+      "id": "11"
+    },
+    {
+      "name": "gorlllll",
+      "species": "sddsda",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "anxious"
+      ],
+      "id": "12"
+    },
+    {
+      "name": "A Koan",
+      "species": "blob",
+      "diet": "herbivore",
+      "personalityTraits": [
+        "zany"
+      ],
+      "id": "13"
     }
   ]
 }

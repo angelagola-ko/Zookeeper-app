@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = require('path');
-const express=require('express');
+const express = require('express');
 const { animals } = require('./data/animals');
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
 // for adding css
-app.use(express.static('public/zookeepr-public'));
+app.use(express.static('public'));
 // parse incoming string or array data
 app.use(express.urlencoded({ extended: true }));
 // parse incoming JSON data
@@ -49,7 +49,7 @@ function filterByQuery(query, animalsArray){
             filteredResults = filteredResults.filter(animal => animal.species === query.species);
         }
         if (query.name) {
-            filteredResults = filteredResults.filter(animal => animal.name === query.name)
+            filteredResults = filteredResults.filter(animal => animal.name === query.name);
         }
         //return the filtered results
         return filteredResults;
@@ -82,7 +82,7 @@ function createNewAnimal(body, animalsArray) {
         if (!animal.species || typeof animal.species !== 'string'){
             return false;
         }
-        if (!animal.diet || animal.diet !== 'string') {
+        if (!animal.diet || typeof animal.diet !== 'string') {
             return false;
         }
         if (!animal.personalityTraits || !Array.isArray(animal.personalityTraits)) {
@@ -96,7 +96,7 @@ app.get('/api/animals', (req,res) => {
     if (req.query) {
         results = filterByQuery(req.query, results);//return single animal
     }
-    console.log(req.query);
+   // console.log(req.query);
     res.json(results);
 });
 
@@ -132,20 +132,20 @@ app.post('/api/animals', (req,res) => {
 
 
 app.get('/', (req,res) => {
-        res.sendFile(path.join(__dirname, './public/zookeepr-public/index.html'));
+        res.sendFile(path.join(__dirname, './public/index.html'));
     });
 
     
 app.get('/animals', (req,res) => {//normal HTML page
-    res.sendFile(path.join(__dirname, './public/zookeepr-public/animals.html'));
+    res.sendFile(path.join(__dirname, './public/animals.html'));
 });
 
 app.get('/zookeeper', (req,res) => {
-    res.sendFile(path.join(__dirname, './public/zookeepr-public/zookeepers.html'));
+    res.sendFile(path.join(__dirname, './public/zookeepers.html'));
 });
 //catches errors in routes and brings to homepage *=wildcard
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, './public/zookeepr-public/index.html'));
+    res.sendFile(path.join(__dirname, './public/index.html'));
   });
 
     app.listen(PORT, () => {
